@@ -22,8 +22,8 @@ function App() {
     if (_token) {
 
       dispatch({
-        type : 'SET_TOKEN',
-        token : _token
+        type: 'SET_TOKEN',
+        token: _token
       })
 
       spotify.setAccessToken(_token);
@@ -35,22 +35,34 @@ function App() {
         });
       });
 
-    spotify.getUserPlaylists().then(playlist => {
-      dispatch({
-        type : 'SET_PLAYLIST',
-        playlist 
-      })
-    })
+      spotify.getMyTopArtists().then((response) =>
+        dispatch({
+          type: "SET_TOP_ARTISTS",
+          top_artists: response,
+        })
+      );
 
-    spotify.getPlaylist('7aVigxaJjYd6x2ZIgtVKno').then(res => {
       dispatch({
-        type : 'SET_DEVELOP_PUR',
-        develop_purpose : res        
+        type: "SET_SPOTIFY",
+        spotify: spotify,
+      });
+
+      spotify.getUserPlaylists().then(playlist => {
+        dispatch({
+          type: 'SET_PLAYLIST',
+          playlist
+        })
       })
-    })
+
+      spotify.getPlaylist('7aVigxaJjYd6x2ZIgtVKno').then(res => {
+        dispatch({
+          type: 'SET_DEVELOP_PUR',
+          develop_purpose: res
+        })
+      })
 
     }
-  }, [])
+  }, [token, dispatch])
 
   console.log(token, user);
 
@@ -59,7 +71,7 @@ function App() {
       {
         token ? <Player spotify={spotify} /> : <Login />
       }
-      {console.log(user,token)}
+      {console.log(user, token)}
     </div>
   );
 }
