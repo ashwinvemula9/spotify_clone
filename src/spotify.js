@@ -5,7 +5,7 @@
 
 export const authEndpoint = "https://accounts.spotify.com/authorize"
 
-const redirectURI = "https://ashwin-clones.github.io/spotify_clone/";
+const redirectURI = "https://ashwinvemula9.github.io/spotify_clone/";
 
 const clientId = "90fece13031946c2b4a07984f5036f11";
 
